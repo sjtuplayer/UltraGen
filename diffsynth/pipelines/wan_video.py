@@ -1,3 +1,4 @@
+import pdb
 import types
 from ..models import ModelManager
 from ..models.wan_video_dit import WanModel
@@ -63,6 +64,7 @@ class WanVideoPipeline(BasePipeline):
             self.dit,
             module_map = {
                 torch.nn.Linear: AutoWrappedLinear,
+                torch.nn.Conv2d: AutoWrappedModule,
                 torch.nn.Conv3d: AutoWrappedModule,
                 torch.nn.LayerNorm: AutoWrappedModule,
                 RMSNorm: AutoWrappedModule,
@@ -450,6 +452,8 @@ def model_fn_wan_video(
     
     t = dit.time_embedding(sinusoidal_embedding_1d(dit.freq_dim, timestep))
     t_mod = dit.time_projection(t).unflatten(1, (6, dit.dim))
+
+
     if motion_bucket_id is not None and motion_controller is not None:
         t_mod = t_mod + motion_controller(motion_bucket_id).unflatten(1, (6, dit.dim))
     context = dit.text_embedding(context)
@@ -459,13 +463,18 @@ def model_fn_wan_video(
         clip_embdding = dit.img_emb(clip_feature)
         context = torch.cat([clip_embdding, context], dim=1)
     
-    x, (f, h, w) = dit.patchify(x)
-    
+    x, grid_size = dit.patchify(x)
+
+    (f, h, w) = grid_size
+
+    f, h, w = f + 100, h + 100, w + 100
     freqs = torch.cat([
         dit.freqs[0][:f].view(f, 1, 1, -1).expand(f, h, w, -1),
         dit.freqs[1][:h].view(1, h, 1, -1).expand(f, h, w, -1),
         dit.freqs[2][:w].view(1, 1, w, -1).expand(f, h, w, -1)
-    ], dim=-1).reshape(f * h * w, 1, -1).to(x.device)
+    ], dim=-1).to(x.device)
+
+    (f, h, w) = grid_size
     
     # TeaCache
     if tea_cache is not None:
@@ -480,8 +489,8 @@ def model_fn_wan_video(
     if tea_cache_update:
         x = tea_cache.update(x)
     else:
-        for block in dit.blocks:
-            x = block(x, context, t_mod, freqs)
+        for dit_block_idx,block in enumerate(dit.blocks):
+            x = block(x, context, t_mod, freqs,(f, h, w),timestep,dit_block_idx)
         if tea_cache is not None:
             tea_cache.store(x)
 

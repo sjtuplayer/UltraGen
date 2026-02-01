@@ -1,13 +1,31 @@
+# UltraGen Requirements
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
 torch>=2.0.0
-torchvision
-cupy-cuda12x
-transformers==4.46.2
-controlnet-aux==0.0.7
-imageio
-imageio[ffmpeg]
-safetensors
-einops
-sentencepiece
-protobuf
-modelscope
-ftfy
+torchvision>=0.15.0
+numpy>=1.23.0
+pillow>=9.0.0
+opencv-python>=4.7.0
+
+# Model and inference
+safetensors>=0.3.0
+transformers>=4.30.0
+accelerate>=0.20.0
+diffusers>=0.18.0
+modelscope>=1.8.0
+
+# Training
+pytorch-lightning>=2.0.0
+tensorboard>=2.13.0
+einops>=0.6.0
+
+# Video processing
+imageio>=2.25.0
+imageio-ffmpeg>=0.4.8
+av>=10.0.0
+
+# Utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+omegaconf>=2.3.0

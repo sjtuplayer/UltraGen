@@ -283,7 +283,7 @@ def launch_training_task(model, args):
     # train
     if args.use_swanlab:
         from swanlab.integration.pytorch_lightning import SwanLabLogger
-        swanlab_config = {"UPPERFRAMEWORK": "DiffSynth-Studio"}
+        swanlab_config = {"UPPERFRAMEWORK": "UltraGen_code"}
         swanlab_config.update(vars(args))
         swanlab_logger = SwanLabLogger(
             project="diffsynth_studio", 

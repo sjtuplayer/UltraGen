@@ -8,7 +8,8 @@ from .sd_unet import SDUNet
 from .sd_vae_encoder import SDVAEEncoder
 from .sd_vae_decoder import SDVAEDecoder
 from .lora import get_lora_loaders
-
+import torch.nn as nn
+import math
 from .sdxl_text_encoder import SDXLTextEncoder, SDXLTextEncoder2
 from .sdxl_unet import SDXLUNet
 from .sdxl_vae_decoder import SDXLVAEDecoder
@@ -68,12 +69,53 @@ def load_model_from_single_file(state_dict, model_names, model_classes, model_re
         else:
             model_state_dict, extra_kwargs = state_dict_results, {}
         torch_dtype = torch.float32 if extra_kwargs.get("upcast_to_float32", False) else torch_dtype
+
         with init_weights_on_device():
             model = model_class(**extra_kwargs)
         if hasattr(model, "eval"):
             model = model.eval()
+
+        # 遍历模型的参数
+        for name, param in model.named_parameters():
+            if name not in model_state_dict:
+                # 检查参数的形状
+                param = nn.Parameter(torch.empty(param.shape, device='cpu'))
+                param_shape = param.shape
+                # 根据参数的形状和类型，使用默认初始化
+                if isinstance(param, nn.Parameter):
+                    # 对于线性层的权重
+                    if 'conv' in name:
+                        if 'weight' in name:
+                            avg_value = 1.0 / torch.prod(torch.tensor(param_shape[1:], dtype=torch.float32))
+                            #print('0',name, param_shape,avg_value)
+                            nn.init.constant_(param,avg_value)
+                        elif 'bias' in name:
+                            #print('1', name, param_shape)
+                            nn.init.zeros_(param)
+                    elif 'weight' in name:
+                        if len(param_shape) == 2:  # 线性层
+                            nn.init.kaiming_uniform_(param, a=math.sqrt(5))
+                        if 'alpha_time_projection' in name:
+                            nn.init.zeros_(param)
+                    # 对于偏置
+                    elif 'bias' in name:
+                        nn.init.zeros_(param)
+                    elif 'lora_A' in name:
+                        nn.init.kaiming_uniform_(param, a=math.sqrt(5))
+                    elif 'lora_B' in name:
+                        nn.init.zeros_(param)
+                    else:
+                        raise "error"+name
+                    #print('in',param.dtype)
+                # 将初始化的参数添加到 state_dict 中
+                model_state_dict[name] = param.detach().cpu()
+        #print('out', param.dtype)
         model.load_state_dict(model_state_dict, assign=True)
+        #print(torch.dtype)
         model = model.to(dtype=torch_dtype, device=device)
+        # for name, param in model.named_parameters():
+        #     print(name, param.dtype)
+
         loaded_model_names.append(model_name)
         loaded_models.append(model)
     return loaded_model_names, loaded_models

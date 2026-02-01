@@ -20,7 +20,7 @@ preference_model_id: TypeAlias = Literal[
 ]
 model_dict = {
     "ImageReward": {
-        "model_id": "DiffSynth-Studio/QualityMetric_reward_pretrained",
+        "model_id": "UltraGen_code/QualityMetric_reward_pretrained",
         "allow_file_pattern": [
             "ImageReward/ImageReward.safetensors",
             "ImageReward/med_config.json",
@@ -38,7 +38,7 @@ model_dict = {
         "model_class": ImageRewardScore
     },
     "Aesthetic": {
-        "model_id": "DiffSynth-Studio/QualityMetric_reward_pretrained",
+        "model_id": "UltraGen_code/QualityMetric_reward_pretrained",
         "allow_file_pattern": [
             "aesthetic-predictor/sac+logos+ava1-l14-linearMSE.safetensors",
             "clip-vit-large-patch14/config.json",
@@ -57,7 +57,7 @@ model_dict = {
         "model_class": AestheticScore
     },
     "PickScore": {
-        "model_id": "DiffSynth-Studio/QualityMetric_reward_pretrained",
+        "model_id": "UltraGen_code/QualityMetric_reward_pretrained",
         "allow_file_pattern": [
             "PickScore_v1/*",
             "CLIP-ViT-H-14-laion2B-s32B-b79K/config.json",
@@ -75,7 +75,7 @@ model_dict = {
         "model_class": PickScore
     },
     "CLIP": {
-        "model_id": "DiffSynth-Studio/QualityMetric_reward_pretrained",
+        "model_id": "UltraGen_code/QualityMetric_reward_pretrained",
         "allow_file_pattern": [
             "CLIP-ViT-H-14-laion2B-s32B-b79K/open_clip_pytorch_model.bin",
             "bpe_simple_vocab_16e6.txt.gz",
@@ -87,7 +87,7 @@ model_dict = {
         "model_class": CLIPScore
     },
     "HPSv2": {
-        "model_id": "DiffSynth-Studio/QualityMetric_reward_pretrained",
+        "model_id": "UltraGen_code/QualityMetric_reward_pretrained",
         "allow_file_pattern": [
             "HPS_v2/HPS_v2_compressed.safetensors",
             "bpe_simple_vocab_16e6.txt.gz",
@@ -100,7 +100,7 @@ model_dict = {
         "extra_kwargs": {"model_version": "v2"}
     },
     "HPSv2.1": {
-        "model_id": "DiffSynth-Studio/QualityMetric_reward_pretrained",
+        "model_id": "UltraGen_code/QualityMetric_reward_pretrained",
         "allow_file_pattern": [
             "HPS_v2/HPS_v2.1_compressed.safetensors",
             "bpe_simple_vocab_16e6.txt.gz",
@@ -113,7 +113,7 @@ model_dict = {
         "extra_kwargs": {"model_version": "v21"}
     },
     "MPS": {
-        "model_id": "DiffSynth-Studio/QualityMetric_reward_pretrained",
+        "model_id": "UltraGen_code/QualityMetric_reward_pretrained",
         "allow_file_pattern": [
             "MPS_overall_checkpoint/MPS_overall_checkpoint_diffsynth.safetensors",
             "CLIP-ViT-H-14-laion2B-s32B-b79K/config.json",

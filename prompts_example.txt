@@ -1,0 +1,25 @@
+# Example Prompts for UltraGen Video Generation
+# One prompt per line. Lines starting with # are ignored.
+#
+# NOTE: UltraGen works best with landscape and scenic content.
+# Complex human actions and fast movements may have limited support.
+
+# Natural Landscapes & Mountain Scenes
+The video captures a breathtaking view of a mountainous landscape at sunrise, with a sea of clouds enveloping the valleys and rolling hills. The sky transitions from deep orange to soft yellow, creating a serene and majestic atmosphere.
+The video showcases a breathtaking aerial view of a majestic mountain surrounded by lush greenery and vast ocean waters. The mountain's rugged texture and vibrant colors stand out against the serene backdrop of the sea and sky.
+
+# Underwater & Marine Life
+The video captures an underwater scene featuring a clownfish swimming near a sea anemone in a vibrant coral reef environment
+
+# Urban & Cityscape
+The video showcases a stunning aerial view of a modern cityscape with a mix of historic and contemporary architecture. The skyline is dominated by tall skyscrapers, while the foreground features a river with bridges and lush greenery. The sky is partly cloudy, adding a dynamic element to the scene.
+A time-lapse video captures a cityscape at night with a lightning strike illuminating the sky above a busy highway.
+
+# Dramatic Natural Phenomena
+The video captures the intense and fiery eruption of a volcano, showcasing the raw power of nature as molten lava flows and spews into the air.
+
+# Interior Spaces
+The video showcases a luxurious modern living room with elegant furniture, a grand staircase, and large windows that let in ample natural light.
+
+# Animals & Nature
+A cat is sitting on a pile of chopped wood next to a tree trunk and a brick wall.

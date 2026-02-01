@@ -1,255 +1,355 @@
-# DiffSynth Studio
-[![PyPI](https://img.shields.io/pypi/v/DiffSynth)](https://pypi.org/project/DiffSynth/)
-[![license](https://img.shields.io/github/license/modelscope/DiffSynth-Studio.svg)](https://github.com/modelscope/DiffSynth-Studio/blob/master/LICENSE)
-[![open issues](https://isitmaintained.com/badge/open/modelscope/DiffSynth-Studio.svg)](https://github.com/modelscope/DiffSynth-Studio/issues)
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/modelscope/DiffSynth-Studio.svg)](https://GitHub.com/modelscope/DiffSynth-Studio/pull/)
-[![GitHub latest commit](https://badgen.net/github/last-commit/modelscope/DiffSynth-Studio)](https://GitHub.com/modelscope/DiffSynth-Studio/commit/)
+# UltraGen: High-Resolution Video Generation with Hierarchical Attention [AAAI 2026]
 
 <p align="center">
-<a href="https://trendshift.io/repositories/10946" target="_blank"><img src="https://trendshift.io/api/badge/repositories/10946" alt="modelscope%2FDiffSynth-Studio | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+  <a href="https://sjtuplayer.github.io/projects/UltraGen/">🌐 Project Page</a> •
+  <a href="https://arxiv.org/abs/2510.18775">📄 Paper</a> •
+  <a href="https://huggingface.co/JTUplayer/Ultragen">🤗 Hugging Face</a> •
+  <a href="https://github.com/zhangzjn/T3-Video">🚀 T3-Video (4K)</a> •
+  <a href="#citation">📚 Citation</a>
 </p>
 
-Document: https://diffsynth-studio.readthedocs.io/zh-cn/latest/index.html
 
-## Introduction
+---
 
-Welcome to the magic world of Diffusion models!
+## Overview
 
-DiffSynth consists of two open-source projects:
-* [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio): Focused on aggressive technological exploration. Targeted at academia. Provides more cutting-edge technical support and novel inference capabilities.
-* [DiffSynth-Engine](https://github.com/modelscope/DiffSynth-Engine): Focused on stable model deployment. Geared towards industry. Offers better engineering support, higher computational performance, and more stable functionality.
+**UltraGen** is a novel video generation framework that enables **efficient and end-to-end native high-resolution** video synthesis. This is the official implementation of our AAAI 2026 paper.
 
-DiffSynth-Studio is an open-source project aimed at exploring innovations in AIGC technology. We have integrated numerous open-source Diffusion models, including FLUX and Wan, among others. Through this open-source project, we hope to connect models within the open-source community and explore new technologies based on diffusion models.
+### Highlights
 
-Until now, DiffSynth-Studio has supported the following models:
+- **🎯 First Native 4K Model**: Achieve native high-quality 4K video generation, eliminating "pseudo-high-resolution" limitations
+- **⚡ Efficient Architecture**: Hierarchical dual-branch attention with 4.78× speedup for 4K and 2.69× speedup for 1080P
+- **🏆 Superior Quality**: State-of-the-art performance across all metrics (HD-FVD, HD-MSE, HD-LPIPS, CLIP scores)
+- **💡 Novel Design**: Global-local attention decomposition solving O((T·H·W)²) complexity bottleneck
 
-* [Wan-Video](https://github.com/Wan-Video/Wan2.1)
-* [StepVideo](https://github.com/stepfun-ai/Step-Video-T2V)
-* [HunyuanVideo](https://github.com/Tencent/HunyuanVideo), [HunyuanVideo-I2V]()
-* [CogVideoX](https://huggingface.co/THUDM/CogVideoX-5b)
-* [FLUX](https://huggingface.co/black-forest-labs/FLUX.1-dev)
-* [ExVideo](https://huggingface.co/ECNU-CILab/ExVideo-SVD-128f-v1)
-* [Kolors](https://huggingface.co/Kwai-Kolors/Kolors)
-* [Stable Diffusion 3](https://huggingface.co/stabilityai/stable-diffusion-3-medium)
-* [Stable Video Diffusion](https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt)
-* [Hunyuan-DiT](https://github.com/Tencent/HunyuanDiT)
-* [RIFE](https://github.com/hzwer/ECCV2022-RIFE)
-* [ESRGAN](https://github.com/xinntao/ESRGAN)
-* [Ip-Adapter](https://github.com/tencent-ailab/IP-Adapter)
-* [AnimateDiff](https://github.com/guoyww/animatediff/)
-* [ControlNet](https://github.com/lllyasviel/ControlNet)
-* [Stable Diffusion XL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
-* [Stable Diffusion](https://huggingface.co/runwayml/stable-diffusion-v1-5)
+For more details, visit our [project page](https://sjtuplayer.github.io/projects/UltraGen/) or read the [paper](https://arxiv.org/abs/2510.18775).
 
-## News
-- **March 31, 2025** We support InfiniteYou, an identity preserving method for FLUX. Please refer to [./examples/InfiniteYou/](./examples/InfiniteYou/) for more details.
+### Key Features
 
-- **March 25, 2025** 🔥🔥🔥 Our new open-source project, [DiffSynth-Engine](https://github.com/modelscope/DiffSynth-Engine), is now open-sourced! Focused on stable model deployment. Geared towards industry. Offers better engineering support, higher computational performance, and more stable functionality.
+- 🎬 **Native High-Resolution**: 1080P/2K/4K video generation without super-resolution pipeline
+- ⚡ **Hierarchical Attention**: Dual-branch architecture (local + global) for efficient computation
+- 🎨 **Flexible Control**: Fine-grained control over generation parameters
+- 🔧 **Easy to Use**: Simple one-line command interface
+- 🚀 **Production Ready**: Optimized for both research and practical applications
 
-- **March 13, 2025** We support HunyuanVideo-I2V, the image-to-video generation version of HunyuanVideo open-sourced by Tencent. Please refer to [./examples/HunyuanVideo/](./examples/HunyuanVideo/) for more details.
+### Additional Resources
 
-- **February 25, 2025** We support Wan-Video, a collection of SOTA video synthesis models open-sourced by Alibaba. See [./examples/wanvideo/](./examples/wanvideo/).
+- 🌐 **Project Page**: [https://sjtuplayer.github.io/projects/UltraGen/](https://sjtuplayer.github.io/projects/UltraGen/)
+- 📄 **Paper**: [arXiv:2510.18775](https://arxiv.org/abs/2510.18775)
+- 🚀 **T3-Video (4K)**: [10x+ faster 4K generation](https://github.com/zhangzjn/T3-Video)
 
-- **February 17, 2025** We support [StepVideo](https://modelscope.cn/models/stepfun-ai/stepvideo-t2v/summary)! State-of-the-art video synthesis model! See [./examples/stepvideo](./examples/stepvideo/).
-
-- **December 31, 2024** We propose EliGen, a novel framework for precise entity-level controlled text-to-image generation, complemented by an inpainting fusion pipeline to extend its capabilities to image inpainting tasks. EliGen seamlessly integrates with existing community models, such as IP-Adapter and In-Context LoRA, enhancing its versatility. For more details, see [./examples/EntityControl](./examples/EntityControl/).
-  - Paper: [EliGen: Entity-Level Controlled Image Generation with Regional Attention](https://arxiv.org/abs/2501.01097)
-  - Model: [ModelScope](https://www.modelscope.cn/models/DiffSynth-Studio/Eligen), [HuggingFace](https://huggingface.co/modelscope/EliGen)
-  - Online Demo: [ModelScope EliGen Studio](https://www.modelscope.cn/studios/DiffSynth-Studio/EliGen)
-  - Training Dataset: [EliGen Train Set](https://www.modelscope.cn/datasets/DiffSynth-Studio/EliGenTrainSet)
-
-- **December 19, 2024** We implement advanced VRAM management for HunyuanVideo, making it possible to generate videos at a resolution of 129x720x1280 using 24GB of VRAM, or at 129x512x384 resolution with just 6GB of VRAM. Please refer to [./examples/HunyuanVideo/](./examples/HunyuanVideo/) for more details.
-
-- **December 18, 2024** We propose ArtAug, an approach designed to improve text-to-image synthesis models through synthesis-understanding interactions. We have trained an ArtAug enhancement module for FLUX.1-dev in the format of LoRA. This model integrates the aesthetic understanding of Qwen2-VL-72B into FLUX.1-dev, leading to an improvement in the quality of generated images.
-  - Paper: https://arxiv.org/abs/2412.12888
-  - Examples: https://github.com/modelscope/DiffSynth-Studio/tree/main/examples/ArtAug
-  - Model: [ModelScope](https://www.modelscope.cn/models/DiffSynth-Studio/ArtAug-lora-FLUX.1dev-v1), [HuggingFace](https://huggingface.co/ECNU-CILab/ArtAug-lora-FLUX.1dev-v1)
-  - Demo: [ModelScope](https://modelscope.cn/aigc/imageGeneration?tab=advanced&versionId=7228&modelType=LoRA&sdVersion=FLUX_1&modelUrl=modelscope%3A%2F%2FDiffSynth-Studio%2FArtAug-lora-FLUX.1dev-v1%3Frevision%3Dv1.0), HuggingFace (Coming soon)
-
-- **October 25, 2024** We provide extensive FLUX ControlNet support. This project supports many different ControlNet models that can be freely combined, even if their structures differ. Additionally, ControlNet models are compatible with high-resolution refinement and partition control techniques, enabling very powerful controllable image generation. See [`./examples/ControlNet/`](./examples/ControlNet/).
-
-- **October 8, 2024.** We release the extended LoRA based on CogVideoX-5B and ExVideo. You can download this model from [ModelScope](https://modelscope.cn/models/ECNU-CILab/ExVideo-CogVideoX-LoRA-129f-v1) or [HuggingFace](https://huggingface.co/ECNU-CILab/ExVideo-CogVideoX-LoRA-129f-v1).
-
-- **August 22, 2024.** CogVideoX-5B is supported in this project. See [here](/examples/video_synthesis/). We provide several interesting features for this text-to-video model, including
-  - Text to video
-  - Video editing
-  - Self-upscaling
-  - Video interpolation
-
-- **August 22, 2024.** We have implemented an interesting painter that supports all text-to-image models. Now you can create stunning images using the painter, with assistance from AI!
-  - Use it in our [WebUI](#usage-in-webui).
-
-- **August 21, 2024.** FLUX is supported in DiffSynth-Studio.
-  - Enable CFG and highres-fix to improve visual quality. See [here](/examples/image_synthesis/README.md)
-  - LoRA, ControlNet, and additional models will be available soon.
-
-- **June 21, 2024.** We propose ExVideo, a post-tuning technique aimed at enhancing the capability of video generation models. We have extended Stable Video Diffusion to achieve the generation of long videos up to 128 frames.
-  - [Project Page](https://ecnu-cilab.github.io/ExVideoProjectPage/)
-  - Source code is released in this repo. See [`examples/ExVideo`](./examples/ExVideo/).
-  - Models are released on [HuggingFace](https://huggingface.co/ECNU-CILab/ExVideo-SVD-128f-v1) and [ModelScope](https://modelscope.cn/models/ECNU-CILab/ExVideo-SVD-128f-v1).
-  - Technical report is released on [arXiv](https://arxiv.org/abs/2406.14130).
-  - You can try ExVideo in this [Demo](https://huggingface.co/spaces/modelscope/ExVideo-SVD-128f-v1)!
-
-- **June 13, 2024.** DiffSynth Studio is transferred to ModelScope. The developers have transitioned from "I" to "we". Of course, I will still participate in development and maintenance.
-
-- **Jan 29, 2024.** We propose Diffutoon, a fantastic solution for toon shading.
-  - [Project Page](https://ecnu-cilab.github.io/DiffutoonProjectPage/)
-  - The source codes are released in this project.
-  - The technical report (IJCAI 2024) is released on [arXiv](https://arxiv.org/abs/2401.16224).
-
-- **Dec 8, 2023.** We decide to develop a new Project, aiming to release the potential of diffusion models, especially in video synthesis. The development of this project is started.
-
-- **Nov 15, 2023.** We propose FastBlend, a powerful video deflickering algorithm.
-  - The sd-webui extension is released on [GitHub](https://github.com/Artiprocher/sd-webui-fastblend).
-  - Demo videos are shown on Bilibili, including three tasks.
-    - [Video deflickering](https://www.bilibili.com/video/BV1d94y1W7PE)
-    - [Video interpolation](https://www.bilibili.com/video/BV1Lw411m71p)
-    - [Image-driven video rendering](https://www.bilibili.com/video/BV1RB4y1Z7LF)
-  - The technical report is released on [arXiv](https://arxiv.org/abs/2311.09265).
-  - An unofficial ComfyUI extension developed by other users is released on [GitHub](https://github.com/AInseven/ComfyUI-fastblend).
-
-- **Oct 1, 2023.** We release an early version of this project, namely FastSDXL. A try for building a diffusion engine.
-  - The source codes are released on [GitHub](https://github.com/Artiprocher/FastSDXL).
-  - FastSDXL includes a trainable OLSS scheduler for efficiency improvement.
-    - The original repo of OLSS is [here](https://github.com/alibaba/EasyNLP/tree/master/diffusion/olss_scheduler).
-    - The technical report (CIKM 2023) is released on [arXiv](https://arxiv.org/abs/2305.14677).
-    - A demo video is shown on [Bilibili](https://www.bilibili.com/video/BV1w8411y7uj).
-    - Since OLSS requires additional training, we don't implement it in this project.
-
-- **Aug 29, 2023.** We propose DiffSynth, a video synthesis framework.
-  - [Project Page](https://ecnu-cilab.github.io/DiffSynth.github.io/).
-  - The source codes are released in [EasyNLP](https://github.com/alibaba/EasyNLP/tree/master/diffusion/DiffSynth).
-  - The technical report (ECML PKDD 2024) is released on [arXiv](https://arxiv.org/abs/2308.03463).
-
+---
 
 ## Installation
 
-Install from source code (recommended):
+### Quick Install
 
-```
-git clone https://github.com/modelscope/DiffSynth-Studio.git
-cd DiffSynth-Studio
+```bash
+# Clone repository
+git clone https://github.com/your-org/UltraGen.git
+cd UltraGen
+
+# Create environment
+conda create -n ultragen python=3.10 -y
+conda activate ultragen
+
+# Install PyTorch
+pip install torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu118
+
+# Install dependencies
 pip install -e .
 ```
 
-Or install from pypi (There is a delay in the update. If you want to experience the latest features, please do not use this installation method.):
-
-```
-pip install diffsynth
-```
-
-If you encounter issues during installation, it may be caused by the packages we depend on. Please refer to the documentation of the package that caused the problem.
-
-* [torch](https://pytorch.org/get-started/locally/)
-* [sentencepiece](https://github.com/google/sentencepiece)
-* [cmake](https://cmake.org)
-* [cupy](https://docs.cupy.dev/en/stable/install.html)
-
-## Usage (in Python code)
-
-The Python examples are in [`examples`](./examples/). We provide an overview here.
-
 ### Download Models
 
-Download the pre-set models. Model IDs can be found in [config file](/diffsynth/configs/model_config.py).
+**Hugging Face**: [https://huggingface.co/JTUplayer/Ultragen](https://huggingface.co/JTUplayer/Ultragen)
 
-```python
-from diffsynth import download_models
+```bash
+# Download base model (required)
+python -c "from modelscope import snapshot_download; \
+snapshot_download('Wan-AI/Wan2.1-T2V-1.3B', local_dir='checkpoints/Wan2.1-T2V-1.3B')"
 
-download_models(["FLUX.1-dev", "Kolors"])
+# Download finetuned checkpoint from Hugging Face
+# Visit https://huggingface.co/JTUplayer/Ultragen for the latest model
+huggingface-cli download JTUplayer/Ultragen --local-dir checkpoints/ultragen
 ```
 
-Download your own models.
+---
 
-```python
-from diffsynth.models.downloader import download_from_huggingface, download_from_modelscope
+## Quick Start
 
-# From Modelscope (recommended)
-download_from_modelscope("Kwai-Kolors/Kolors", "vae/diffusion_pytorch_model.fp16.bin", "models/kolors/Kolors/vae")
-# From Huggingface
-download_from_huggingface("Kwai-Kolors/Kolors", "vae/diffusion_pytorch_model.fp16.safetensors", "models/kolors/Kolors/vae")
+### Generate Your First Video
+
+```bash
+# Simple one-liner
+bash inference.sh "The video captures a breathtaking view of a mountainous landscape at sunrise, with a sea of clouds enveloping the valleys and rolling hills."
 ```
 
-### Video Synthesis
+Output: `outputs/video_0000.mp4`
 
-#### Text-to-video using CogVideoX-5B
+### More Examples
 
-CogVideoX-5B is released by ZhiPu. We provide an improved pipeline, supporting text-to-video, video editing, self-upscaling and video interpolation. [`examples/video_synthesis`](./examples/video_synthesis/)
+```bash
+# Underwater scene
+bash inference.sh "The video captures an underwater scene featuring a clownfish swimming near a sea anemone in a vibrant coral reef environment"
 
-The video on the left is generated using the original text-to-video pipeline, while the video on the right is the result after editing and frame interpolation.
+# Urban landscape
+bash inference.sh "The video showcases a stunning aerial view of a modern cityscape with a mix of historic and contemporary architecture."
 
-https://github.com/user-attachments/assets/26b044c1-4a60-44a4-842f-627ff289d006
+# Natural phenomena
+bash inference.sh "The video captures the intense and fiery eruption of a volcano, showcasing the raw power of nature as molten lava flows and spews into the air."
 
-#### Long Video Synthesis
-
-We trained extended video synthesis models, which can generate 128 frames. [`examples/ExVideo`](./examples/ExVideo/)
-
-https://github.com/modelscope/DiffSynth-Studio/assets/35051019/d97f6aa9-8064-4b5b-9d49-ed6001bb9acc
-
-https://github.com/user-attachments/assets/321ee04b-8c17-479e-8a95-8cbcf21f8d7e
-
-#### Toon Shading
-
-Render realistic videos in a flatten style and enable video editing features. [`examples/Diffutoon`](./examples/Diffutoon/)
-
-https://github.com/Artiprocher/DiffSynth-Studio/assets/35051019/b54c05c5-d747-4709-be5e-b39af82404dd
-
-https://github.com/Artiprocher/DiffSynth-Studio/assets/35051019/20528af5-5100-474a-8cdc-440b9efdd86c
-
-#### Video Stylization
-
-Video stylization without video models. [`examples/diffsynth`](./examples/diffsynth/)
-
-https://github.com/Artiprocher/DiffSynth-Studio/assets/35051019/59fb2f7b-8de0-4481-b79f-0c3a7361a1ea
-
-### Image Synthesis
-
-Generate high-resolution images, by breaking the limitation of diffusion models! [`examples/image_synthesis`](./examples/image_synthesis/).
-
-LoRA fine-tuning is supported in [`examples/train`](./examples/train/).
-
-|FLUX|Stable Diffusion 3|
-|-|-|
-|![image_1024_cfg](https://github.com/user-attachments/assets/984561e9-553d-4952-9443-79ce144f379f)|![image_1024](https://github.com/modelscope/DiffSynth-Studio/assets/35051019/4df346db-6f91-420a-b4c1-26e205376098)|
-
-|Kolors|Hunyuan-DiT|
-|-|-|
-|![image_1024](https://github.com/modelscope/DiffSynth-Studio/assets/35051019/53ef6f41-da11-4701-8665-9f64392607bf)|![image_1024](https://github.com/modelscope/DiffSynth-Studio/assets/35051019/60b022c8-df3f-4541-95ab-bf39f2fa8bb5)|
-
-|Stable Diffusion|Stable Diffusion XL|
-|-|-|
-|![1024](https://github.com/Artiprocher/DiffSynth-Studio/assets/35051019/6fc84611-8da6-4a1f-8fee-9a34eba3b4a5)|![1024](https://github.com/Artiprocher/DiffSynth-Studio/assets/35051019/67687748-e738-438c-aee5-96096f09ac90)|
-
-## Usage (in WebUI)
-
-Create stunning images using the painter, with assistance from AI!
-
-https://github.com/user-attachments/assets/95265d21-cdd6-4125-a7cb-9fbcf6ceb7b0
-
-**This video is not rendered in real-time.**
-
-Before launching the WebUI, please download models to the folder `./models`. See [here](#download-models).
-
-* `Gradio` version
-
-```
-pip install gradio
+# Time-lapse
+bash inference.sh "A time-lapse video captures a cityscape at night with a lightning strike illuminating the sky above a busy highway."
 ```
 
-```
-python apps/gradio/DiffSynth_Studio.py
+> **Note**: UltraGen works best with **landscape and scenic content**. Complex human actions and fast movements may have limited support in the current version.
+
+### Advanced Usage
+
+```bash
+# Use Python API for more control
+python tools/inference/generate.py \
+  --model_dir checkpoints/Wan2.1-T2V-1.3B \
+  --checkpoint checkpoints/ultragen_1080p.ckpt \
+  --prompt "Your amazing prompt" \
+  --output_dir outputs/custom
 ```
 
-![20240822102002](https://github.com/user-attachments/assets/59613157-de51-4109-99b3-97cbffd88076)
+### Batch Generation
 
-* `Streamlit` version
+```bash
+# Create prompts.txt with one prompt per line
+cat > prompts.txt << EOF
+The video captures a breathtaking view of a mountainous landscape at sunrise, with a sea of clouds enveloping the valleys and rolling hills.
+The video showcases a stunning aerial view of a modern cityscape with a mix of historic and contemporary architecture.
+The video captures an underwater scene featuring a clownfish swimming near a sea anemone in a vibrant coral reef environment
+EOF
+
+# Generate all videos
+python tools/inference/generate.py \
+  --checkpoint checkpoints/ultragen_1080p.ckpt
+  --model_dir checkpoints/Wan2.1-T2V-1.3B \
+  --prompt_file prompts.txt
+```
+
+---
+
+## Technical Details
+
+UltraGen features a **hierarchical dual-branch attention** architecture:
+
+### Architecture Innovation
+
+1. **Global-Local Attention Decomposition**
+   - Local branch: High-fidelity regional details
+   - Global branch: Overall semantic consistency
+   - Avoids O((T·H·W)²) complexity
+
+2. **Spatially Compressed Global Modeling**
+   - Efficient learning of global dependencies
+   - Reduced computational overhead
+
+3. **Hierarchical Cross-Window Local Attention**
+   - Enhanced information flow across windows
+   - Lower computational cost
+
+### Performance
+
+Compared to baseline Wan2.1:
+
+| Method | Resolution | Speedup | HD-FVD ↓ | HD-MSE ↑ | HD-LPIPS ↑ |
+|--------|------------|---------|----------|----------|------------|
+| Wan2.1 | 1080P | 1.00× | 245.37 | 375.82 | 0.5201 |
+| **UltraGen** | **1080P** | **2.69×** | **214.12** | **390.19** | **0.5455** |
+| Wan2.1 | 4K | 1.00× | 486.29 | 362.45 | 0.6102 |
+| **UltraGen** | **4K** | **4.78×** | **424.61** | **386.01** | **0.6450** |
+
+**Key Improvements**:
+- 🚀 **2.69× faster** at 1080P, **4.78× faster** at 4K
+- 📊 Better quality across all metrics (lower FVD, higher MSE and LPIPS)
+- ⚡ Efficient hierarchical attention without sacrificing quality
+
+For more technical details, see our [paper](https://arxiv.org/abs/2510.18775).
+
+---
+
+## 4K Generation with T3-Video
+
+For even faster 4K generation (10x+ acceleration), check out **[T3-Video](https://github.com/zhangzjn/T3-Video)**:
+
+- **Transform Trained Transformer** architecture
+- Native 4K support (3840x2176, 81 frames)
+- More stable and consistent results
+- Built on UltraGen base
+
+**Paper**: [Transform Trained Transformer: Accelerating Naive 4K Video Generation Over 10×](https://arxiv.org/abs/2512.13492)
+
+---
+
+## Training
+
+### Prepare Dataset
+
+**Recommended Dataset**: We recommend using [UltraVideo](https://github.com/xzc-zju/UltraVideo) - a high-quality UHD 4K video dataset with comprehensive captions (NeurIPS 2025).
+
+```bash
+# Download UltraVideo dataset
+huggingface-cli download --repo-type dataset APRIL-AIGC/UltraVideo \
+  --local-dir ./data/UltraVideo --resume-download
+```
+
+**Custom Dataset Format**:
 
 ```
-pip install streamlit streamlit-drawable-canvas
+dataset/
+├── videos/
+│   ├── video001.mp4
+│   ├── video002.mp4
+│   └── ...
+└── captions.json  # {"video001.mp4": "description", ...}
 ```
 
-```
-python -m streamlit run apps/streamlit/DiffSynth_Studio.py
+### Single-GPU Training
+
+```bash
+python tools/training/train.py \
+  --task train \
+  --dataset_path data/UltraVideo \
+  --output_path experiments/my_model \
+  --dit_path checkpoints/Wan2.1-T2V-1.3B/diffusion_pytorch_model.safetensors \
+  --train_architecture full \
+  --height 1088 --width 1920 --num_frames 81 \
+  --learning_rate 1e-4 \
+  --use_gradient_checkpointing
 ```
 
-https://github.com/Artiprocher/DiffSynth-Studio/assets/35051019/93085557-73f3-4eee-a205-9829591ef954
+### Multi-GPU Training (Single Machine)
+
+```bash
+# 8 GPUs on one machine
+torchrun --nproc_per_node=8 tools/training/train.py \
+  --task train \
+  --dataset_path data/UltraVideo \
+  --output_path experiments/my_model \
+  --dit_path checkpoints/Wan2.1-T2V-1.3B/diffusion_pytorch_model.safetensors \
+  --train_architecture full \
+  --learning_rate 1e-4 \
+  --use_gradient_checkpointing
+```
+
+### Multi-Machine Distributed Training
+
+For large-scale training across multiple machines, use `scripts/training/run.sh`:
+
+```bash
+# 1. Create a hosts file listing all machine IPs (one per line)
+cat > hosts.txt << EOF
+192.168.1.10
+192.168.1.11
+192.168.1.12
+192.168.1.13
+EOF
+
+# 2. Configure the training script
+# Edit scripts/training/run.sh to set:
+#   - N_NODES: number of machines
+#   - DATASET_PATH: path to UltraVideo or your dataset
+#   - DIT_PATH: base model checkpoint path
+#   - OUTPUT_PATH: where to save trained models
+#   - Training hyperparameters (learning rate, resolution, etc.)
+
+# 3. Launch distributed training on each node
+bash scripts/training/run.sh
+```
+
+**Training Configuration**:
+- Automatic node rank detection and master node setup
+- Supports both 1080P and 4K training (adjust resolution parameters)
+- Compatible with pssh for parallel node deployment
+
+---
+
+## Project Structure
+
+```
+UltraGen/
+├── README.md                  # This file
+├── inference.sh               # Quick inference script
+├── tools/
+│   ├── inference/
+│   │   └── generate.py        # Main inference script
+│   └── training/
+│       ├── train.py           # Training script
+├── diffsynth/                 # Core library
+├── checkpoints/               # Model checkpoints
+├── outputs/                   # Generated videos
+└── prompts_example.txt        # Example prompts
+```
+
+
+---
+
+## Related Projects
+
+- 🚀 **[T3-Video](https://github.com/zhangzjn/T3-Video)**: Transform Trained Transformer for 10x+ faster 4K generation
+- 🎨 **[DiffSynth Studio](https://github.com/modelscope/DiffSynth-Studio)**: Diffusion synthesis framework
+- 📹 **[Wan2.1](https://github.com/Wan-Video/Wan2.1)**: Base video generation model
+
+## Acknowledgements
+
+We thank the contributors of DiffSynth Studio, Wan-Video, and the open-source community for their valuable work.
+
+---
+
+## License
+
+Apache License 2.0 - See [LICENSE](LICENSE) file for details.
+
+---
+
+## Citation
+
+If you find UltraGen useful in your research, please cite:
+
+```bibtex
+@inproceedings{hu2026ultragen,
+  title={UltraGen: High-Resolution Video Generation with Hierarchical Attention},
+  author={Hu, Teng and Zhang, Jiangning and Su, Zihan and Yi, Ran},
+  booktitle={AAAI Conference on Artificial Intelligence},
+  year={2026}
+}
+```
+
+**Paper**: [https://arxiv.org/abs/2510.18775](https://arxiv.org/abs/2510.18775)  
+**Project Page**: [https://sjtuplayer.github.io/projects/UltraGen/](https://sjtuplayer.github.io/projects/UltraGen/)
+
+### T3-Video Citation
+
+If you use T3-Video for 4K generation:
+
+```bibtex
+@misc{t3video,
+    title={Transform Trained Transformer: Accelerating Naive 4K Video Generation Over 10×}, 
+    author={Jiangning Zhang and Junwei Zhu and Teng Hu and Yabiao Wang and Donghao Luo and Weijian Cao and Zhenye Gan and Xiaobin Hu and Zhucun Xue and Chengjie Wang},
+    year={2025},
+    eprint={2512.13492},
+    archivePrefix={arXiv}
+}
+```
+
+---
+
+## Contact
+
+- **Issues**: [GitHub Issues](https://github.com/your-org/UltraGen/issues)
+- **Project Page**: [https://sjtuplayer.github.io/projects/UltraGen/](https://sjtuplayer.github.io/projects/UltraGen/)
+- **Paper**: [arXiv:2510.18775](https://arxiv.org/abs/2510.18775)
+
+---
+
+<p align="center">
+<strong>UltraGen: High-Resolution Video Generation with Hierarchical Attention</strong><br>
+AAAI 2026<br>
+Made with ❤️ by Shanghai Jiao Tong University & Zhejiang University
+</p>

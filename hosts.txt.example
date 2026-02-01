@@ -1,0 +1,17 @@
+# Example hosts file for distributed training
+# 
+# Instructions:
+# 1. List one IP address or hostname per line
+# 2. The first line should be the master node
+# 3. Copy this file to hosts.txt and modify with your actual IPs
+# 4. Ensure all nodes can SSH to each other without password
+#
+# Example for 8 machines:
+192.168.1.10
+192.168.1.11
+192.168.1.12
+192.168.1.13
+192.168.1.14
+192.168.1.15
+192.168.1.16
+192.168.1.17
